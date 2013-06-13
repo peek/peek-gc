@@ -53,8 +53,8 @@ module Peek
           ::GC::Profiler.clear
         end
 
-        # Once the request is completely finished
-        subscribe 'action_dispatch.request' do |name, start, finish, id, payload|
+        # Once the action is finished
+        subscribe 'process_action.action_controller' do |name, start, finish, id, payload|
           parse_result
           ::GC::Profiler.disable
           ::GC::Profiler.clear
