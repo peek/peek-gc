@@ -36,7 +36,7 @@ module Peek
         @invokes = results.first.scan(/\s+\d+(?:\.\d+)?/).first.strip
 
         results[2..-1].each do |line|
-          _, invoke_time, use_size, total_size, total_object, gc_time = line.scan(/\s+\d+(?:\.\d+)?/).collect(&:strip)
+          _, invoke_time, use_size, total_size, total_object, gc_time = line.scan(/\s+\-?\d+(?:\.\d+)?/).collect(&:strip)
 
           @invoke_time  += invoke_time.to_f
           @use_size     += use_size.to_i
