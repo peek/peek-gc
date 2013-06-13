@@ -9,6 +9,8 @@ module Peek
       attr_reader :gc_time
 
       def results
+        parse_result
+
         {
           :invokes      => invokes,
           :invoke_time  => "%.2f" % invoke_time,
@@ -55,7 +57,6 @@ module Peek
 
         # Once the action is finished
         subscribe 'process_action.action_controller' do |name, start, finish, id, payload|
-          parse_result
           ::GC::Profiler.disable
           ::GC::Profiler.clear
         end
