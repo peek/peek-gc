@@ -21,7 +21,7 @@ Or install it yourself as:
 Add the following to your `config/initializers/peek.rb`:
 
 ```ruby
-Peek.into Peek::Views::Gc
+Peek.into Peek::Views::GC
 ```
 
 ## Contributing
