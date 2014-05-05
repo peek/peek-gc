@@ -51,12 +51,16 @@ module Peek
       def setup_subscribers
         # Reset each counter when a new request starts
         before_request do |name, start, finish, id, payload|
+          next if @profiler_already_enabled = ::GC::Profiler.enabled?
+          
           ::GC::Profiler.enable
           ::GC::Profiler.clear
         end
 
         # Once the action is finished
         subscribe 'process_action.action_controller' do |name, start, finish, id, payload|
+          next if @profiler_already_enabled
+          
           ::GC::Profiler.disable
           ::GC::Profiler.clear
         end
